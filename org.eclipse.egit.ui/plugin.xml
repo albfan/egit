@@ -871,6 +871,17 @@
            toolbarPath="org.eclipse.egit.ui"
            tooltip="%FetchAction_tooltip">
 		 </action>
+         <action
+           class="org.eclipse.egit.ui.internal.actions.SimpleSvnFetchAction"
+           definitionId="org.eclipse.egit.ui.team.SimpleSvnFetch"
+           icon="icons/obj16/fetch.png"
+           id="org.eclipse.egit.ui.actionsvnfetch"
+           label="%SvnFetchFromUpstreamAction.label"
+           menubarPath="org.eclipse.egit.ui.gitmenu/repo"
+           style="push"
+           toolbarPath="org.eclipse.egit.ui"
+           tooltip="%SvnFetchAction_tooltip">
+         </action>
 		 <action
            class="org.eclipse.egit.ui.internal.actions.PushUpstreamOrBranchAction"
            definitionId="org.eclipse.egit.ui.team.SimplePush"
@@ -999,6 +1010,11 @@
             categoryId="org.eclipse.egit.ui.commandCategory"
             id="org.eclipse.egit.ui.team.SimpleFetch"
             name="%FetchUpstreamCommand.name">
+      </command>
+      <command
+              categoryId="org.eclipse.egit.ui.commandCategory"
+              id="org.eclipse.egit.ui.team.SimpleSvnFetch"
+              name="%SvnFetchUpstreamCommand.name">
       </command>
       <command
             categoryId="org.eclipse.egit.ui.commandCategory"
@@ -4211,6 +4227,27 @@
             </visibleWhen>
          </command>
          <command
+                 commandId="org.eclipse.egit.ui.team.SimpleSvnFetch"
+                 icon="icons/obj16/fetch.png"
+                 label="%SvnFetchFromUpstreamCommand.label"
+                 style="push">
+            <visibleWhen
+                    checkEnabled="false">
+               <and>
+                  <count
+                          value="1">
+                  </count>
+                  <iterate
+                          ifEmpty="false"
+                          operator="and">
+                     <instanceof
+                             value="org.eclipse.egit.ui.internal.repository.tree.RepositoryNode">
+                     </instanceof>
+                  </iterate>
+               </and>
+            </visibleWhen>
+         </command>
+         <command
                commandId="org.eclipse.egit.ui.PushHeadToGerrit"
                label="%PushToGerritMenu.label"
                style="push">
@@ -4952,6 +4989,18 @@
                   </test>
                </visibleWhen>
             </command>
+            <command
+                    commandId="org.eclipse.egit.ui.team.SimpleSvnFetch"
+                    label="%SvnFetchFromUpstreamAction.label"
+                    mnemonic="f"
+                    style="push">
+               <visibleWhen
+                       checkEnabled="false">
+                  <test
+                          property="GitSelection.projectsSingleRepository">
+                  </test>
+               </visibleWhen>
+            </command>
             <dynamic
                   class="org.eclipse.egit.ui.internal.actions.PushMenu"
                   id="org.eclipse.egit.ui.team.popup.Push">
@@ -5094,6 +5143,11 @@
                      commandId="org.eclipse.egit.ui.team.SimpleFetch"
                      label="%FetchFromUpstreamAction.label"
                      style="push">
+               </command>
+               <command
+                       commandId="org.eclipse.egit.ui.team.SimpleSvnFetch"
+                       label="%SvnFetchFromUpstreamAction.label"
+                       style="push">
                </command>
                <dynamic
                      class="org.eclipse.egit.ui.internal.actions.PushMenu"
@@ -6119,6 +6173,10 @@
       <image
             commandId="org.eclipse.egit.ui.team.SimpleFetch"
             icon="icons/obj16/fetch.png">
+      </image>
+      <image
+              commandId="org.eclipse.egit.ui.team.SimpleSvnFetch"
+              icon="icons/obj16/fetch.png">
       </image>
       <image
             commandId="org.eclipse.egit.ui.team.SimplePush"
